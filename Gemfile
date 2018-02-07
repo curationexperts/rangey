@@ -53,6 +53,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'hyrax', '2.0.1'
+
+gem 'blacklight_range_limit', '~> 6.3', '>= 6.3.2'
+
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
