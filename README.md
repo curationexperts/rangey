@@ -1,5 +1,13 @@
 # README
 
+# Getting Started
+* `git clone https://github.com/curationexperts/rangey.git`
+* `cd rangey`
+* `bundle install`
+* `rake db:migrate`
+* `bin/rails hyrax:default_admin_set:create`
+* `bundle exec bin/rails hydra:server`
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
