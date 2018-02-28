@@ -54,6 +54,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem 'hyrax', '2.0.1'
 
+gem 'blacklight', '~> 6.9.0'
 gem 'blacklight_range_limit', '~> 6.3', '>= 6.3.2'
 
 group :development, :test do

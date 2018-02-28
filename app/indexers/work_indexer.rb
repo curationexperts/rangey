@@ -11,9 +11,31 @@ class WorkIndexer < Hyrax::WorkIndexer
 
 
   # Uncomment this block if you want to add custom indexing behavior:
-  # def generate_solr_document
-  #  super.tap do |solr_doc|
-  #    solr_doc['my_custom_field_ssim'] = object.my_custom_property
-  #  end
-  # end
+  def generate_solr_document
+   super.tap do |solr_doc|
+     solr_doc['year_iim'] = extract_years(object.date_created)
+   end
+  end
+
+  def extract_years(dates)
+    dates.flat_map{ |d| extract_year(d) }.uniq
+  end
+
+  def extract_year(date)
+    date = date.to_s
+    if date.blank?
+      nil
+    elsif /^\d{4}$/ =~ date
+      # Date.iso8601 doesn't support YYYY dates
+      date.to_i
+    elsif /^\d{4}-\d{4}$/ =~ date
+      # date range in YYYY-YYYY format
+      earliest, latest = date.split('-').flat_map{ |y| y.to_i }
+      (earliest..latest).to_a
+    else
+      Date.iso8601(date).year
+    end
+  rescue ArgumentError
+    raise "Invalid date: #{date.inspect} in #{inspect}"
+  end
 end
